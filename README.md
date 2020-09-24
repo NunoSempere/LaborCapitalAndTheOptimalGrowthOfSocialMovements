@@ -42,3 +42,27 @@ print(x)
 ```
 
 The two examples should give the same results, but don't. 
+
+### Why reverse shooting doesn't work
+
+Consider this example:
+
+```r
+## Stylized forward shooting
+
+x <- 0
+for(i in c(1:200)){
+  x <- x + 7^i
+}
+
+## Stylized reverse shooting
+
+y <- x
+for(i in c(200:1)){
+  y <- y - 7^i
+}
+print(y)
+# [1] -3.762262199769919175323e+152
+```
+
+Here, `y` should at the end be 0, but floating point errors ensure that it isn't. Given that our variables grow exponentially, we work with very large numbers and reverse shooting encounters similar errors. 
